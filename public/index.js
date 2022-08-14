@@ -89,15 +89,15 @@ video.onclick = async () => {
 
 let on
 
+// console.log(video.duration);
+let width = video.currentTime * seeked.offsetWidth / video.duration
+seekedbar.style.width = `${width}px`
 setInterval(async (e) => {
   if (on && video.paused == false) {
     
   
 
 
-    // console.log(video.duration);
-    let width = video.currentTime * seeked.offsetWidth / video.duration
-    seekedbar.style.width = `${width}px`
     
     if (!seek) {
       width > seeked.offsetWidth / 2 ? seekedimg.style.left = `${width - seekedimg.offsetWidth}px` : seekedimg.style.left = `${width}px`
