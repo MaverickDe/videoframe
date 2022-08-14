@@ -1,0 +1,37 @@
+.seeked{
+    width: 100%;
+        height: 5px;
+        background-color: blue;
+        position: relative;
+}
+
+
+.seekedbar{
+    width: 100%;
+        height: 100%;
+        background-color: red;
+}
+
+
+.div:hover >.seeked>.seekedimg{
+    display: block;
+
+}
+
+.seekedimg{
+
+    display: none;
+ 
+    border: 1px solid yellow;
+    position: absolute;
+        bottom: 10px;
+        width: 100px;
+        border-radius: 5px
+}
+
+body{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
