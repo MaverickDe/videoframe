@@ -59,21 +59,31 @@ class Frame {
 
   getcurrenttimeframe() {
     return new Promise((res, rej) => {
-     
-     
-
-    res(this.canvas_(this.video));
-   
+      if (this.currenturl) {
+        URL.revokeObjectURL(this.currenturl);
+      
+      }
+      
+      
+      this.currenturl = this.canvas_(this.video);
+      res(this.currenturl);
+      
     });
   }
-
+  
   getframe(e) {
     return new Promise((res, rej) => {
       this.frameviddeo.currentTime = e;
-
+      
       this.frameviddeo.onseeked = (e) => {
         // console.log("kfkfkfk", this.canvas_())
-        res(this.canvas_(this.frameviddeo));
+        if (this.url) {
+          URL.revokeObjectURL(this.url);
+        
+        }
+        this.url = this.canvas_(this.frameviddeo);
+        res(this.url);
+        
       };
     });
     // return(this.canvas_())
