@@ -90,9 +90,9 @@ video.onclick = async () => {
 let on
 
 // console.log(video.duration);
-let width = video.currentTime * seeked.offsetWidth / video.duration
-seekedbar.style.width = `${width}px`
 setInterval(async (e) => {
+  let width = video.currentTime * seeked.offsetWidth / video.duration
+  seekedbar.style.width = `${width}px`
   if (on && video.paused == false) {
     
   
@@ -136,7 +136,10 @@ divv.onmouseout = () => {
 seeked.addEventListener("mouseout", async e => {
     seek  = false
 })
+
+
 seeked.addEventListener("mousemove", async e => {
+  e.cancelBubble
     console.log("ff")
     time = e.offsetX / (seeked.offsetWidth / video.duration);
      let width =e.offsetX
@@ -145,4 +148,7 @@ seeked.addEventListener("mousemove", async e => {
     seek = true
     let b = await frame.getframe(time);
     seekedimg.src=b
+})
+seekedimg.addEventListener("mousemove", async e => {
+  e.cancelBubble
 })
