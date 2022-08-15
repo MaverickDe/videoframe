@@ -101,7 +101,7 @@ let on
 
 // console.log(video.duration);
 setInterval(async () => {
-  console.log("kk")
+
   let width = video.currentTime * seeked.offsetWidth / video.duration
   seekedbar.style.width = `${width}px`
   if (on && video.paused == false) {
