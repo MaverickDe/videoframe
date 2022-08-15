@@ -100,7 +100,8 @@ video.onclick = async () => {
 let on
 
 // console.log(video.duration);
-setInterval(async (e) => {
+setInterval(async () => {
+  console.log("kk")
   let width = video.currentTime * seeked.offsetWidth / video.duration
   seekedbar.style.width = `${width}px`
   if (on && video.paused == false) {
@@ -148,17 +149,49 @@ seeked.addEventListener("mouseout", async e => {
 })
 
 
-seeked.addEventListener("mousemove", async e => {
-  e.cancelBubble
-    console.log("ff")
-    time = e.offsetX / (seeked.offsetWidth / video.duration);
-     let width =e.offsetX
-  
-    width>seeked.offsetWidth/2? seekedimg.style.left=`${width-seekedimg.offsetWidth}px`:seekedimg.style.left=`${width }px`
-    seek = true
-    let b = await frame.getframe(time);
-    seekedimg.src=b
+let move = async (e) => {
+  e.cancelBubble;
+  console.log("ff");
+  let x =
+    e.offsetX ||
+    (e.changedTouches &&
+      e.changedTouches[0].clientX - e.currentTarget.getBoundingClientRect().x);
+  time = x / (seeked.offsetWidth / video.duration);
+  let width = x;
+  console.log(e)
+
+  width > seeked.offsetWidth / 2
+    ? (seekedimg.style.left = `${width - seekedimg.offsetWidth}px`)
+    : (seekedimg.style.left = `${width}px`);
+  seek = true;
+  let b = await frame.getframe(time);
+  seekedimg.src = b;
+};
+seeked.addEventListener("mousemove", move)
+
+
+
+
+
+seeked.addEventListener("touchmove", move
+);
+
+
+
+divv.addEventListener('touchstart', e => {
+  seekedimg.style.display = "block"
+   on = true;
+ 
+ 
 })
-seekedimg.addEventListener("mousemove", async e => {
-  e.cancelBubble
+
+divv.addEventListener('touchend', e => {
+  
+  setTimeout(() => {
+    seekedimg.style.display = "none"
+    on = false;
+    seek=false
+    
+  },3000)
+ 
 })
